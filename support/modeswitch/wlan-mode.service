@@ -1,0 +1,13 @@
+[Unit]
+Description=Wlan Mode Switcher
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/si/modeswitch
+ExecStart=/opt/si/modeswitch/wlan-mode.sh
+
+[Install]
+WantedBy=multi-user.target
+
