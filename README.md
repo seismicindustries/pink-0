@@ -1,4 +1,4 @@
-View this project on [CADLAB.io](https://cadlab.io/project/1079).
+<!--- View this project on [CADLAB.io](https://cadlab.io/project/1079). -->
 
 # (s)pink-0
 ![pic of the spink-0 PCB adaption](https://raw.githubusercontent.com/seismicindustries/pink-0/master/hardware/spink-0.jpg)
