@@ -3,7 +3,11 @@
         ##      ##    or <http://opensource.org/licenses/MIT>
         ##      ##
 ##########      ############################################################# shaduzlabs.com #######
-
+##
+## seismic industries	-	changed raspap source
+## 				added mode switching scripts 
+## 				change mode switching scripts to from cron to systemd
+##
 platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
@@ -39,7 +43,7 @@ echo -e "                             ) )"
 echo -e "                            ( (  ))                "
 echo -e "                             ) )("
 echo -e "                              ))       ))),,        "
-echo -e "                              (       /  ///       "
+echo -e "       RRR                    (       /  ///       "
 echo -e "                                     _ _  /"
 echo -e "                             _U___  <     )  ()"
 echo -e "                            / /      \_- |. //"
@@ -48,13 +52,13 @@ echo -e "                             __     ,-\"   //"
 echo -e "                            /  \ ,-\"     //"
 echo -e "               _  .  --. ,--\,\" \"---    //"
 echo -e "           /\_/ \| \"\"  -\"    \"-.       //"
-echo -e "           \  \  |                    //|"
-echo -e "          ,_\________________________//||"
-echo -e "          '--------------------------, ||                    utis"
+echo -e "           \  \  |                    //|"             
+echo -e "          ,_\________________________//||              =^.^=    meow"
+echo -e "          '--------------------------, ||" 
 echo -e "             //                      \\\\||"
 echo -e "            //                        \\\\|"
 echo ""
-echo -e "          \033[1m\033[96mSit down and relax, this will take some time...\033[m"
+echo -e "          \033[1m\033[96mSit down and relax, this will take some time...\033[m ]"
 echo ""
 
 echo ""
@@ -81,7 +85,9 @@ echo ""
 echo -e "[ \033[1m\033[96mpink\033[m ] Install RaspAP --------------------------------------------------------"
 if [ $platform == "linux-rpi" ];
   then
-    wget -q https://git.io/vDr0i -O /tmp/raspap && bash /tmp/raspap
+#    wget -q https://git.io/vDr0i -O /tmp/raspap && bash /tmp/raspap
+#    new raspap source - other link doesn't work
+     wget -q https://git.io/voEUQ -O /tmp/raspap && bash /tmp/raspap
 fi
 
 echo ""
@@ -121,7 +127,7 @@ if [ $1 == "no-ui" ]
     cmake -DCMAKE_BUILD_TYPE=Release -DUSE_PI_ZERO=OFF -DUSE_WEBSOCKET=ON -DJUST_INSTALL_CEREAL=ON ..
   else
     echo -e "[ \033[1m\033[96mpink\033[m ] Raspberry Pi Zero shield support is enabled ---------------------------"
-    cmake -DCMAKE_BUILD_TYPE=Release -DUSE_PI_ZERO=ON -DUSE_WEBSOCKET=ON -DJUST_INSTALL_CEREAL=ON ..
+    cmake -DCMAKE_BUILD_TYPE=Release -DUSE_PI_ZERO=ON -DUSE_WEBSOCKET=OFF -DJUST_INSTALL_CEREAL=ON ..
 fi
 make
 if [ $platform == "linux-rpi" ];
@@ -130,6 +136,21 @@ if [ $platform == "linux-rpi" ];
     sudo update-rc.d pink defaults
 fi
 cd ..
+
+echo ""
+echo ""
+echo ""
+echo -e "[ \033[1m\033[96mpink\033[m ] Install wlan mode switching script into systemctl's realms -------------"
+echo ""
+if [ $platform == "linux-rpi" ];
+  then
+    sudo mkdir /opt/si
+    sudo mkdir /opt/si/modeswitch
+    sudo cp support/modeswitch/wlan-mode.sh /opt/si/modeswitch/.
+    sudo cp support/modeswitch/wlan-mode.service /etc/systemd/system/.
+    sudo systemctl daemon-reload
+    sudo systemctl enable wlan-mode.service
+fi
 
 echo ""
 echo ""
