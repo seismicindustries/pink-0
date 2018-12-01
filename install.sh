@@ -3,17 +3,14 @@
         ##      ##    or <http://opensource.org/licenses/MIT>
         ##      ##
 ##########      ############################################################# shaduzlabs.com #######
-<<<<<<< HEAD
 ##
 ## seismic industries	-	changed raspap source
 ## 				added mode switching scripts 
 ## 				change mode switching scripts to from cron to systemd
 ##
-=======
 
 #!/bin/bash
 
->>>>>>> master-holder
 platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
